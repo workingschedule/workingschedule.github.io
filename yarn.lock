@@ -1334,6 +1334,14 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.60.7"
+  resolved "https://registry.npm.taobao.org/@types/react-native/download/@types/react-native-0.60.7.tgz#900311fd57f9cf4f3aea469b1b5af283860ddebb"
+  integrity sha1-kAMR/Vf5z0866kabG1ryg4YN3rs=
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react-slick@^0.23.4":
   version "0.23.4"
   resolved "https://registry.npm.taobao.org/@types/react-slick/download/@types/react-slick-0.23.4.tgz#c97e2a9e7e3d1933c68593b8e82752fab1e8ce53"
@@ -1353,6 +1361,15 @@
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/@types/stack-utils/download/@types/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha1-CoUdO9lkmPolwzq3J47TvWXwbD4=
+
+"@types/styled-components@^4.1.18":
+  version "4.1.18"
+  resolved "https://registry.npm.taobao.org/@types/styled-components/download/@types/styled-components-4.1.18.tgz#348804fe5a399ae0a46550afaf030085815ad931"
+  integrity sha1-NIgE/lo5muCkZVCvrwMAhYFa2TE=
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+    csstype "^2.2.0"
 
 "@types/yargs-parser@*":
   version "13.0.0"
