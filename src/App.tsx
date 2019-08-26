@@ -10,10 +10,12 @@ moment.locale('zh-cn')
 
 const DavidArr = ['休息', '休息', '夜班', '夜班', '中班', '中班', '白班', '白班']
 const HongArr = ['上班', '休息']
+const JunArr = ['白一', '白二', '白三', '夜班']
 
 function getListData (value: any) {
   const DavidDays = moment('2019-5-4').diff(value.format('YYYY-MM-DD'), 'days')
   const HongDays = moment('2019-5-4').diff(value.format('YYYY-MM-DD'), 'days')
+  const JunDays = moment('2019-8-26').diff(value.format('YYYY-MM-DD'), 'days')
   let listData: ({ type: 'warning' | 'success' | 'error', content: string })[] = []
 
   if (DavidDays <= 0) {
@@ -29,6 +31,17 @@ function getListData (value: any) {
     listData.push({
       type: 'warning',
       content: '岳  ' + HongArr[HongIndex]
+    })
+  }
+
+  if (JunDays <= 0) {
+    const JunIndex = Math.abs(JunDays) % 4
+    console.log('xx', (value.format('E') === '6' || value.format('E') === '7'))
+    const isWeekend = (value.format('E') === '6' || value.format('E') === '7')
+    const text = isWeekend ? '休' : JunArr[JunIndex]
+    listData.push({
+      type: 'error',
+      content: '军  ' + text
     })
   }
   return listData || [];
@@ -116,6 +129,12 @@ class WorkingSchedule extends Component {
     return obj && obj.content
   }
 
+  get Jun () {
+    const { selectedValue } = this.state
+    const obj = selectedValue && getListData(selectedValue).find(item => item.type === 'error')
+    return obj && obj.content
+  }
+
   render () {
     const { value, selectedValue } = this.state
 
@@ -124,6 +143,7 @@ class WorkingSchedule extends Component {
         <h1 style={{ marginTop: '.5em' }}>{selectedValue && selectedValue.format('YYYY-MM-DD')}</h1>
         <Alert type='success' message={`${this.David}`} />
         <Alert type='warning' message={`${this.Hong}`} />
+        <Alert type='error' message={`${this.Jun}`} />
 
         <CalendarStyled
           value={value}
