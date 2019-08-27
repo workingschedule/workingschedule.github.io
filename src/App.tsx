@@ -13,9 +13,9 @@ const HongArr = ['上班', '休息']
 const JunArr = ['白一', '白二', '白三', '夜班']
 
 function getListData (value: any) {
-  const DavidDays = moment('2019-5-4').diff(value.format('YYYY-MM-DD'), 'days')
-  const HongDays = moment('2019-5-4').diff(value.format('YYYY-MM-DD'), 'days')
-  const JunDays = moment('2019-8-26').diff(value.format('YYYY-MM-DD'), 'days')
+  const DavidDays = moment(new Date('2019-5-4')).diff(value.format('YYYY-MM-DD'), 'days')
+  const HongDays = moment(new Date('2019-5-4')).diff(value.format('YYYY-MM-DD'), 'days')
+  const JunDays = moment(new Date('2019-8-26')).diff(value.format('YYYY-MM-DD'), 'days')
   let listData: ({ type: 'warning' | 'success' | 'error', content: string })[] = []
 
   if (DavidDays <= 0) {
@@ -36,9 +36,9 @@ function getListData (value: any) {
 
   if (JunDays <= 0) {
     const JunIndex = Math.abs(JunDays) % 4
-    console.log('xx', (value.format('E') === '6' || value.format('E') === '7'))
     const isWeekend = (value.format('E') === '6' || value.format('E') === '7')
     const text = isWeekend ? '休' : JunArr[JunIndex]
+
     listData.push({
       type: 'error',
       content: '军  ' + text
