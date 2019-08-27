@@ -1327,7 +1327,7 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
   integrity sha512-eqz8c/0kwNi/OEHQfvIuJVLTst3in0e7uTKeuY+WL/zfKn0xVujOTp42bS/vUUokhK5P2BppLd9JXMOMHcgbjA==
 
-"@types/react-dom@16.9.0":
+"@types/react-dom@^16.9.0":
   version "16.9.0"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.0.tgz?cache=0&sync_timestamp=1566247547173&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.0.tgz#ba6ddb00bf5de700b0eb91daa452081ffccbfdea"
   integrity sha1-um3bAL9d5wCw65HapFIIH/zL/eo=
@@ -1349,7 +1349,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.9.2":
+"@types/react@*", "@types/react@^16.9.0":
   version "16.9.2"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.2.tgz#6d1765431a1ad1877979013906731aae373de268"
   integrity sha1-bRdlQxoa0Yd5eQE5BnMarjc94mg=
@@ -1756,10 +1756,10 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-antd@^3.22.0:
-  version "3.22.0"
-  resolved "https://registry.npm.taobao.org/antd/download/antd-3.22.0.tgz#07828fddd40db3516e92868b5e4689215c67a197"
-  integrity sha1-B4KP3dQNs1FukoaLXkaJIVxnoZc=
+antd@^3.22.1:
+  version "3.22.1"
+  resolved "https://registry.npm.taobao.org/antd/download/antd-3.22.1.tgz#fae8080bc12418e49a6a9ab047f5cd0a0864a710"
+  integrity sha1-+ugIC8EkGOSaapqwR/XNCghkpxA=
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
     "@ant-design/icons" "~2.1.1"

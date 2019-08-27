@@ -1,10 +1,12 @@
 import { Alert, Badge, Calendar } from 'antd';
 import 'antd/dist/antd.css';
-import locale from 'antd/lib/date-picker/locale/zh_CN';
+// import locale from 'antd/lib/date-picker/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+
+const formatStr = 'YYYY-M-DD'
 
 moment.locale('zh-cn')
 
@@ -13,9 +15,9 @@ const HongArr = ['上班', '休息']
 const JunArr = ['白一', '白二', '白三', '夜班']
 
 function getListData (value: any) {
-  const DavidDays = moment(new Date('2019-5-4')).diff(value.format('YYYY-MM-DD'), 'days')
-  const HongDays = moment(new Date('2019-5-4')).diff(value.format('YYYY-MM-DD'), 'days')
-  const JunDays = moment(new Date('2019-8-26')).diff(value.format('YYYY-MM-DD'), 'days')
+  const DavidDays = moment('2019-5-4', formatStr).diff(value.format('YYYY-MM-DD'), 'days')
+  const HongDays = moment('2019-5-4', formatStr).diff(value.format('YYYY-MM-DD'), 'days')
+  const JunDays = moment('2019-8-26', formatStr).diff(value.format('YYYY-MM-DD'), 'days')
   let listData: ({ type: 'warning' | 'success' | 'error', content: string })[] = []
 
   if (DavidDays <= 0) {
@@ -52,30 +54,14 @@ function dateCellRender (value: any) {
   return (
     <ul className="events">
       {
-        listData.map(item => (
-          <li key={item.content}>
+        listData.map((item, index) => (
+          <li key={item.content + index}>
             <Badge status={item.type} text={item.content} />
           </li>
         ))
       }
     </ul>
   );
-}
-
-function getMonthData (value: any) {
-  if (value.month() === 8) {
-    return 1394;
-  }
-}
-
-function monthCellRender (value: any) {
-  const num = getMonthData(value);
-  return num ? (
-    <div className="notes-month">
-      <section>{num}</section>
-      <span>Backlog number</span>
-    </div>
-  ) : null;
 }
 
 const CalendarStyled = styled(Calendar)`
@@ -103,55 +89,50 @@ const CalendarStyled = styled(Calendar)`
 class WorkingSchedule extends Component {
   state = {
     value: moment(),
-    selectedValue: moment(),
   }
 
   onSelect = (value: any) => {
     this.setState({
       value,
-      selectedValue: value,
     });
   }
 
   onPanelChange = (value: any) => {
-    this.setState({ value });
+    this.setState({ value })
   }
 
   get David () {
-    const { selectedValue } = this.state
-    const obj = selectedValue && getListData(selectedValue).find(item => item.type === 'success')
+    const { value } = this.state
+    const obj = value && getListData(value).find(item => item.type === 'success')
     return obj && obj.content
   }
 
   get Hong () {
-    const { selectedValue } = this.state
-    const obj = selectedValue && getListData(selectedValue).find(item => item.type === 'warning')
+    const { value } = this.state
+    const obj = value && getListData(value).find(item => item.type === 'warning')
     return obj && obj.content
   }
 
   get Jun () {
-    const { selectedValue } = this.state
-    const obj = selectedValue && getListData(selectedValue).find(item => item.type === 'error')
+    const { value } = this.state
+    const obj: any = value && getListData(value).find(item => item.type === 'error')
+    const xx = getListData(value)
     return obj && obj.content
   }
 
   render () {
-    const { value, selectedValue } = this.state
-
+    const { value } = this.state
     return (
       <div className="workingSchedule">
-        <h1 style={{ marginTop: '.5em' }}>{selectedValue && selectedValue.format('YYYY-MM-DD')}</h1>
+        <h1 style={{ marginTop: '.5em' }}>{value && value.format('YYYY-MM-DD')}</h1>
         <Alert type='success' message={`${this.David}`} />
         <Alert type='warning' message={`${this.Hong}`} />
         <Alert type='error' message={`${this.Jun}`} />
-
         <CalendarStyled
           value={value}
           onSelect={this.onSelect}
           onPanelChange={this.onPanelChange}
-          locale={locale}
           dateCellRender={dateCellRender}
-          monthCellRender={monthCellRender}
         />
       </div>
     );
